@@ -1,0 +1,66 @@
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+<nav class="navbar navbar-expand-sm navbar-light bg-light mb-4">
+  <div class="container">
+
+          <a class="navbar-brand" href="{{ path('app_home') }}" style="color: #B0413E" ><img src="{{ asset('uploads/logo.png')}}" width="50">anterest </a>
+
+
+
+    <div class="collapse navbar-collapse" id="navbarsExample03">
+      <ul class="navbar-nav ms-auto">
+          <li class="nav-item ">
+          <form name="recherche" action="{{ path('app_pin_rechercher') }}" method="POST">
+             <div class="row">
+                 <div class="input-group  mb-3">
+                 <div class="col-md-4">
+              <select class="form-select" aria-label="Default select example" id="ca" name="ca">
+
+                  <option  value="" >Catégorie</option>
+
+                  <option value="Love">Love💙</option>
+                  <option value="Sport">Sport ⚽</option>
+                  <option value="Birthday">Birthday 🎂</option>
+                  <option value="Food">Food🍔</option>
+                  <option value="Other">Other</option>
+
+              </select></div>
+                 <div class="col-md-5" >
+              <input type="text" class="form-control " placeholder="Search..." name="re" id="re">
+                 </div> <div class="col-m-3" >
+
+                     <button class="btn "><span>🔎</span></button></div>
+                 </div></div>
+          </form>
+
+          </li>
+
+        {% if app.user %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_pin_create') }}">New Pin</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('account') }}">Account</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('js-logout-form').submit();">Logout</a>
+          </li>
+
+          <form id="js-logout-form" action="{{ path('app_logout') }}" method="POST" style="display: none;">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+          </form>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_register') }}">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+          </li>
+        {% endif %}
+
+      </ul>
+    </div>
+  </div>
+</nav>

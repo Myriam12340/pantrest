@@ -1,0 +1,186 @@
+{% extends 'base.html.twig' %}
+{% block title 'Find all the best pins on earth!' %}
+
+{% block body %}
+
+
+
+
+<!-- Main Body -->
+<div class="container justify-content-center mt-100 mb-100" xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card"style="background-color: white">
+                <div class="card-body" >
+                    <div class="row">
+<table>
+
+                        <div class="col-md-6 ">
+                            <div class="mw-100 rounded-top overflow-hidden">
+                                <img src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('public/uploads/pin/placeholder.jpg' )) }}" alt="{{ pin.title }}" class="w-100" />
+                                <p class="text-muted">
+                                    <small>
+                                        Submitted
+                                        <time datetime="{{ pin.createdAt|date('Y-m-d H:i:s') }}">{{ pin.createdAt|ago }}</time>
+
+                                    </small>
+                                </p>
+                                {% if  pin.user()==app.user %}
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <a href="{{ path('app_pin_edit', {'id': pin.id}) }}" class="btn btn-light">Edit</a>
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ include('pin/_delete.html.twig') }}
+                                    </div>
+                                    {% endif %}
+
+
+
+                                    <br>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3">
+
+                                <h3   style="color: #B0413E " >{{ pin.title }} </h3>
+
+
+
+                                <p class="pt-3 text-break">
+                                    <label style="font-family: 'Imprint MT Shadow'">Description :</label>
+
+                                    {{ pin.description }}
+                                </p>
+
+
+
+
+
+                                <form id="commentaire" action="{{ path('app_pin_comm') }}" method="post" >
+                                    <div class="input-group">
+
+                                        <textarea class="form-control" id="com" name="com"required aria-label="With textarea" placeholder="entre votre commentaire"></textarea>
+                                        <div class="input-group-prepend">
+                                            <input type="submit" name="commntaire" value="commentaire" class="btn btn-primary  ">
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" id=id name="id" value="{{   pin.id }}">
+
+                                </form>
+                                <br>
+                                {% if coms|length > 0 %}
+                                <h4 class="card-title">Recent Comments</h4>
+                                <h6 class="card-subtitle">Latest Comments section by users</h6>
+                            </div>
+
+                            {% for com in coms %}
+                                <div class="comment-widgets m-b-20">
+                                    <div class="d-flex flex-row comment-row">
+                                        <div class="p-2"><span class="round"><img src="{{ app.user.gravatarUrl }}" alt="user" width="50"></span></div>
+                                        <div class="comment-text w-100">
+                                            <h5>{{ com.user.fullName }}</h5>
+                                            <div class="comment-footer"> <span class="date"><time datetime="{{ com.createdAt|date('Y-m-d H:i:s') }}">{{ com.createdAt|ago }}</time></span> <span class="label label-info">Pending</span>  </div>
+                                            <p class="m-b-5 m-t-10">{{ com.contenu }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            {% else %}
+                                <p class="mt-5 h1 text-center">No comments yet. Be the first!</p>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div></div></table>
+                </div>
+            </div>
+        </div>
+        <style>
+            @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+            body {
+                background-color: #d2d1d1;
+                font-family: 'Calibri', sans-serif !important
+            }
+
+            .card-no-border .card {
+                border: 0px;
+                border-radius: 4px;
+                -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+                box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
+            }
+
+            .card-body {
+                -ms-flex: 1 1 auto;
+                flex: 1 1 auto;
+                padding: 1.25rem
+            }
+
+            .comment-widgets .comment-row:hover {
+                background: rgba(0, 0, 0, 0.02);
+                cursor: pointer
+            }
+
+            .comment-widgets .comment-row {
+                border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+                padding: 15px
+            }
+
+            .comment-text:hover {
+                visibility: hidden
+            }
+
+            .comment-text:hover {
+                visibility: visible
+            }
+
+            .label {
+                padding: 3px 10px;
+                line-height: 13px;
+                color: #ffffff;
+                font-weight: 400;
+                border-radius: 4px;
+                font-size: 75%
+            }
+
+            .round img {
+                border-radius: 100%
+            }
+
+            .label-info {
+                background-color: #1976d2
+            }
+
+            .label-success {
+                background-color: green
+            }
+
+            .label-danger {
+                background-color: #ef5350
+            }
+
+            .action-icons a {
+                padding-left: 7px;
+                vertical-align: middle;
+                color: #99abb4
+            }
+
+            .action-icons a:hover {
+                color: #1976d2
+            }
+
+            .mt-100 {
+                margin-top: 100px
+            }
+
+            .mb-100 {
+                margin-bottom: 100px
+            }
+        </style>
+
+        {% endblock %}

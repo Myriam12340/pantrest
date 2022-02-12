@@ -1,0 +1,71 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+
+
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ pin|length }}</h3>
+
+                    <p>Publications</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-photo-video"></i>
+                </div>
+                <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>{{ notification|length }}</h3>
+
+                    <p>Notification</p>
+                </div>
+                <div class="icon">
+                    <i class="far fa-bell"></i>
+                </div>
+                <a href="{{ path('contact_index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>{{ users|length -1}}</h3>
+
+                    <p>User Registrations</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a href="{{ path('app_users') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>{{ Comments|length }}</h3>
+
+                    <p>
+                        Comments</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <a href="#" class="small-box-footer"> <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+    </div>
+{% endblock %}

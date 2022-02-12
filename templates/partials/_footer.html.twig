@@ -1,0 +1,12 @@
+<footer class="container text-center mt-5" >
+    <p class="text-muted">
+        <small>
+             {{ 'now'|date('Y') }} &middot;
+            Built with <span class="text-danger">&hearts; &#128140;</span>
+            {% if is_granted('ROLE_USER') %}
+            <a href="{{ path('contact_new') }}">contact us</a>
+            {%  endif %}
+        </small>
+    </p>
+
+</footer>

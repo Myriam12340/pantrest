@@ -1,0 +1,13 @@
+html,body{
+
+    font-family: 'Montserrat', sans-serif;
+}
+.alert{padding: 10px;
+    color: white;
+    text-align:center;}
+.alert-success{
+    background-color: olivedrab;
+}
+.alert-error{
+    background-color: red;
+}
